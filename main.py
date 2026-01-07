@@ -1,4 +1,5 @@
 # Classe Base
+import random
 
 class Character():
     def __init__(self, name: str, max_hp: int, strength: int) -> None:
@@ -37,6 +38,22 @@ class Hero(Character):
         else:
             print(f"No potions left")
                 
+class Monster(Character):
+    def __init__(self, name: str, max_hp: int, strength: int) -> None:
+        super().__init__(name, max_hp, strength)
+
+    def attack(self, target: "Character") -> None:
+        if random.random() < 0.25:
+            double_damage = self._strength * 2
+            print(f"CRITICAL HIT! {self._name} deals double damage to {target._name}!")
+            target.receive_damage(double_damage)
+        else:
+            return super().attack(target)
+        
+
     
+    
+
+        
         
     

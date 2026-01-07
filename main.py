@@ -48,11 +48,37 @@ class Monster(Character):
             print(f"CRITICAL HIT! {self._name} deals double damage to {target._name}!")
             target.receive_damage(double_damage)
         else:
-            return super().attack(target)
+            super().attack(target)
         
+if __name__ == "__main__":
+    hero_name = input("What is the Hero name? ")
+    hero = Hero(hero_name, 100, 15, 2)
+    monster = Monster("Goblin", 60, 10)
 
+    print(f"Battle start")
+
+    while hero.is_alive() and monster.is_alive():
+        print(hero)
+        print(monster)
+
+        action = input(f"Press A to attack or H to heal: ")
+        if action.upper() == "A":
+            hero.attack(monster)
+        elif action.upper() == "H":
+            hero.heal()
+        else:
+            print("Action isn't valid. Try A or H")
+            continue
+        
+        if monster.is_alive():
+            monster.attack(hero)
+            print("-" * 20)
     
-    
+    if hero.is_alive():
+        print(f"Hero wins")
+    else:
+        print(f"Hero died")
+
 
         
         
